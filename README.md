@@ -10,6 +10,7 @@ A phishing website is a common social engineering method that mimics trustful un
 
 ## Installation
 To install the required packages and libraries, run this command in the project directory after Forking and cloning this repository:
+
 **step1**
 ```bash
 conda create -m myenv python=3.10
