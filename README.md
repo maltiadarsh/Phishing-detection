@@ -11,11 +11,11 @@
 
 ### Web Interface
 
-![Main Interface](backend\photo\image1.png)
+![Main Interface](https://github.com/maltiadarsh/Phishing-detection/blob/main/backend/photo/image1.png)
 
 ### Detection Results
 
-![Detection Results](backend\photo\image.png)
+![Detection Results](https://github.com/maltiadarsh/Phishing-detection/blob/main/backend/photo/image.png)
 
 ---
 
