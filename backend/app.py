@@ -1,5 +1,4 @@
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import numpy as np
@@ -8,25 +7,23 @@ import warnings
 import logging
 import os
 
-
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-
-
 from utils.convert import convertion
 from utils.feature import FeatureExtraction
 from config.settings import Config
 from config.security_rules import SecurityChecker
 from config.url_utils import URLProcessor
 
-
 warnings.filterwarnings("ignore")
 
+# -------------------------------
 # Logging
+# -------------------------------
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-# FastAPI app
+# -------------------------------
+# FastAPI App
+# -------------------------------
 app = FastAPI(title="Phishing Detection API", version="1.0")
 
 # -------------------------------
@@ -47,23 +44,8 @@ class URLRequest(BaseModel):
     url: str
 
 # -------------------------------
-# Static Frontend Mount
+# API ROUTES
 # -------------------------------
-if os.path.exists("dist"):
-    app.mount("/assets", StaticFiles(directory="dist/assets"), name="assets")
-
-
-# -------------------------------
-# Routes
-# -------------------------------
-
-@app.get("/")
-def home():
-    if os.path.exists("dist/index.html"):
-        return FileResponse("dist/index.html")
-    return {"message": "Frontend not built"}
-
-
 @app.post("/api/check")
 def api_check(request: URLRequest):
     try:
@@ -111,3 +93,15 @@ def api_check(request: URLRequest):
     except Exception as e:
         logger.error(f"API error: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
+
+# -------------------------------
+# FRONTEND STATIC SERVE (React Build)
+# -------------------------------
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+frontend_path = os.path.join(BASE_DIR, "..", "frontend", "build")
+
+if os.path.exists(frontend_path):
+    app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
+    logger.info("Frontend mounted successfully")
+else:
+    logger.warning("Frontend build folder not found")
