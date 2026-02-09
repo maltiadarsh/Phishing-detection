@@ -8,6 +8,11 @@ import warnings
 import logging
 import os
 
+
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+
+
 from utils.convert import convertion
 from utils.feature import FeatureExtraction
 from config.settings import Config
