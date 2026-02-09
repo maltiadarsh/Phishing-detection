@@ -9,10 +9,11 @@ import logging
 import os
 
 from utils.convert import convertion
-from backend.utils.feature import FeatureExtraction
-from backend.config.settings import Config
-from backend.config.security_rules import SecurityChecker
-from backend.config.url_utils import URLProcessor
+from utils.feature import FeatureExtraction
+from config.settings import Config
+from config.security_rules import SecurityChecker
+from config.url_utils import URLProcessor
+
 
 warnings.filterwarnings("ignore")
 
