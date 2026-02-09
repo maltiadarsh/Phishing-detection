@@ -8,7 +8,7 @@ import warnings
 import logging
 import os
 
-from backend.utils.convert import convertion
+from utils.convert import convertion
 from backend.utils.feature import FeatureExtraction
 from backend.config.settings import Config
 from backend.config.security_rules import SecurityChecker
