@@ -98,10 +98,11 @@ def api_check(request: URLRequest):
 # FRONTEND STATIC SERVE (React Build)
 # -------------------------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-frontend_path = os.path.join(BASE_DIR, "..", "frontend", "build")
+frontend_dist = os.path.join(BASE_DIR, "..", "frontend", "dist")
 
-if os.path.exists(frontend_path):
-    app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
-    logger.info("Frontend mounted successfully")
+if os.path.exists(frontend_dist):
+    app.mount("/", StaticFiles(directory=frontend_dist, html=True), name="frontend")
+    print("✅ Serving Vite dist frontend")
 else:
-    logger.warning("Frontend build folder not found")
+    print("⚠ Frontend dist folder not found")
+
